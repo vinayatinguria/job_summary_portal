@@ -10,13 +10,25 @@ print list[1]
 data_filtered = [[l[i] for i in list2] for l in list]
 print data_filtered[1]
 
+#remove stopwords
+job = "Tax Examiners and Collectors, and Revenue Agents"
+stopwords = ['and','Other','All','Including','Except']
+splitwords = job.split()
+
+resultwords = [word for word in splitwords if word not in stopwords]
+result = ' '.join(resultwords)
+print result
+
+#remove comma
+result_nocomma = result.replace(",","")
+print result_nocomma
+
 #count common words in 2 strings
-s="Public Relation and Fundraising Managers"
-s2 = "Industrial Product Managers"
-length = len(s.split())
+s2 = "Public Relation Fundraising Managers"
+length = len(result_nocomma.split())
 count = 0
 for i in range(length):
-    word = s.split(" ", length)[i]
+    word = result_nocomma.split(" ", length)[i]
     if word in s2:
         count= count+ 1
     else:

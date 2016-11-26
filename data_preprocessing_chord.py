@@ -1,19 +1,19 @@
 #import data
 import csv
-with open('data_2015.csv','rb') as f:
+with open('data_unique_jobs.csv','rb') as f:
     reader=csv.reader(f)
     list = map(tuple, reader)
 
 #filter job code, job title, and job group
-list2 = [3, 4, 5]
-print list[1]
-data_filtered = [[l[i] for i in list2] for l in list]
-#TODO: filter detailed jobs
-data_filtered=data_filtered[:5]
+list2 = [0, 1, 2, 3]
+data_filtered=[]
+for l in list:
+    if l[3].__contains__('detailed'):
+        data_filtered.append([l[i] for i in list2])
 
 job_title=[]
 for data in data_filtered:
-    job_title.append(data[1])
+    job_title.append(data[2])
 
 #remove stopwords and commas
 stopwords = ['and','Other','All','Including','Except']
@@ -24,7 +24,6 @@ for job in job_title:
     cleanedwords = ' '.join(cleanedwords)
     cleanedwords = cleanedwords.replace(",","")
     cleaned.append(cleanedwords)
-print cleaned
 
 #count common words in 2 strings
 w= len(cleaned)
@@ -38,4 +37,3 @@ for i in range(len(cleaned)):
                 if word in cleaned[j]:
                     count=count+1
         matrix[i][j]=count
-print matrix

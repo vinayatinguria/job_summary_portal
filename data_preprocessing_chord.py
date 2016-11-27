@@ -1,5 +1,6 @@
 #import data
 import csv
+import json
 with open('data_unique_jobs.csv','rb') as f:
     reader=csv.reader(f)
     list = map(tuple, reader)
@@ -36,4 +37,12 @@ for i in range(len(cleaned)):
             for word in words:
                 if word in cleaned[j]:
                     count=count+1
+
+
         matrix[i][j]=count
+
+with open("matrix.json", "wb") as f:
+    json.dump(matrix, f)
+
+with open("job_list.json", "wb") as f:
+    json.dump(job_title, f)

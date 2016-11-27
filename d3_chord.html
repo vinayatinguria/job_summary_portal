@@ -19,17 +19,18 @@
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
-
+//python -m SimpleHTTPServer 8888 &
+//http://localhost:8888/d3_chord.html
     var matrix;
     $.ajaxSetup({
         async: false
     });
     var matrix_json = $.getJSON( "http://localhost:8888/matrix.json");
     matrix_json.complete(function () {
-        console.log(matrix_json['responseJSON']);
+        //console.log(matrix_json['responseJSON']);
         matrix = matrix_json['responseJSON'];
     });
-    console.log(matrix);
+    //console.log(matrix);
 
     var svg = d3.select("svg"),
             width = +svg.attr("width"),

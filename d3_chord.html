@@ -2,10 +2,66 @@
 
 <meta charset="utf-8">
 <html>
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script>
+            d3.csv("http://localhost:8888/matrix.csv",function(csvdata) {
+                console.log("csv successfully loaded");
+                data = csvdata;
+
+                data.forEach(function (row) {
+                    for (var key in row){
+                        if (row.hasOwnProperty(key)){
+                            if (!isNaN(row[key]))
+                                row[key] = +row[key]
+                        }
+                    }
+                })
+            });
+
+
+        function load_data_by_keyword(keyword) {
+            console.log("load_data_by_keyword");
+            var jobtitle;
+            var flag = false;
+            var data2 = data;
+            for (var i = data.length -1; i >= 0; i--) {
+                if (!flag) {
+                    jobtitle = data[i]['Jobs'].toLowerCase();
+                    if (jobtitle.includes(keyword.toLowerCase())) {
+                        flag = true;
+                        continue;
+                    }
+                }
+
+                for (var key in data2[i]){
+                    if (data2[i].hasOwnProperty(key)){
+                        data2[i][key]=0;
+                    }
+                }
+            }
+
+            data2.forEach(function (row) {
+                    if (row.hasOwnProperty('Jobs')){
+                        delete row.Jobs;
+                    }
+            });
+
+            var matrix = [];
+            data2.forEach(function (row) {
+                matrix.push(Object.values(row));
+            });
+            return matrix;
+        }
+
+    </script>
+</head>
+
 <body>
 
-<input type="text" id="txt1" value="5"/>
-<input type="button" value="Show Percentile Scale" onclick="create_chord_diag()" />
+<input type="text" id="txt1" value="Analyst"/>
+<input type="button" value="Search Keyword" onclick="create_chord_diag()" />
 
 <style>
 
@@ -23,22 +79,16 @@
 
 </style>
 <svg width="960" height="960"></svg>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
 <script>
 //python -m SimpleHTTPServer 8888 &
 //http://localhost:8888/d3_chord.html
+
+
 function create_chord_diag() {
-    var matrix;
-    $.ajaxSetup({
-        async: false
-    });
-    var matrix_json = $.getJSON("http://localhost:8888/matrix.json");
-    matrix_json.complete(function () {
-        //console.log(matrix_json['responseJSON']);
-        matrix = matrix_json['responseJSON'];
-    });
-    //console.log(matrix);
+
+    var keyword =document.getElementById('txt1').value;
+    var matrix = load_data_by_keyword(keyword);
 
     var svg = d3.select("svg"),
             width = +svg.attr("width"),

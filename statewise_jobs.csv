@@ -1,0 +1,55 @@
+﻿ST ,STATE,Count(*)
+VI,Virgin Islands,178
+GU,Guam,249
+DC,District of Columbia,523
+DE,Delaware,557
+WY,Wyoming,558
+AK,Alaska,568
+SD,South Dakota,580
+RI,Rhode Island,582
+VT,Vermont,582
+PR,Puerto Rico,602
+HI,Hawaii,603
+ND,North Dakota,610
+MT,Montana,638
+NH,New Hampshire,648
+ME,Maine,649
+ID,Idaho,667
+NV,Nevada,675
+WV,West Virginia,676
+NE,Nebraska,678
+NM,New Mexico,681
+AR,Arkansas,713
+KS,Kansas,720
+CT,Connecticut,721
+MS,Mississippi,721
+SC,South Carolina,728
+UT,Utah,728
+IA,Iowa,737
+AL,Alabama,748
+KY,Kentucky,748
+LA,Louisiana,752
+OK,Oklahoma,753
+AZ,Arizona,757
+OR,Oregon,760
+MA,Massachusetts,762
+MD,Maryland,765
+CO,Colorado,771
+TN,Tennessee,771
+MO,Missouri,774
+MN,Minnesota,776
+VA,Virginia,776
+NC,North Carolina,777
+GA,Georgia,779
+NJ,New Jersey,780
+WI,Wisconsin,781
+WA,Washington,784
+IN,Indiana,787
+MI,Michigan,790
+OH,Ohio,799
+IL,Illinois,801
+FL,Florida,805
+PA,Pennsylvania,806
+NY,New York,812
+TX,Texas,827
+CA,California,829

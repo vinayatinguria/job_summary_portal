@@ -62,12 +62,18 @@
 <body>
 
 <input type="text" id="txt1" value="Analyst"/>
-<input type="button" value="Search Keyword" onclick="create_chord_diag()" />
-<!-- <link ref="stylesheet" type="text/css" href="css/chord_diagram.css"> -->
+<input type="button" value="Search Keyword" onclick="create_chord_diag()" /> <br>
+<link ref="stylesheet" type="text/css" href="css/chord_diagram.css">
 <link ref="stylesheet" type="text/css" href="css/us_heatmap.css">
-<svg width="960" height="960"></svg>
-<script src="js/chord_diagram.js"></script>
-<script src="js/us_heatmap.js"></script>
-
+<svg id="svg-chord-diagram" width="300" height="300"></svg>
+<svg id="svg-us-heatmap" width="300" height="300"></svg>
+<div>
+<div id="chord-diagram">
+    <script src="js/chord_diagram.js"></script>
+</div> <br>
+<div id="us-heatmap">
+    <script src="js/us_heatmap.js"></script>
+</div>
+</div>
 </body>
 </html>

@@ -3,8 +3,9 @@ var parade = window.histograms.states;
 for (var i = 0 ; i<parade.length ; i++)
     hits[parade[i].name] = parade[i].hits;
 
-var width = 960,
-    height = 500,
+var svg = d3.select("#svg-us-heatmap"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height"),
     centered;
 
 var projection = d3.geoAlbersUsa()
@@ -14,14 +15,11 @@ var projection = d3.geoAlbersUsa()
 var path = d3.geoPath(projection)
     .projection(projection);
 
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
 svg.append("rect")
     .attr("class", "background")
     .attr("width", width)
     .attr("height", height)
+    .attr("color", "#ffffff")
     .on("click", click);
 
 var g = svg.append("g")

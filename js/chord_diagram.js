@@ -7,7 +7,7 @@ function create_chord_diag() {
     var keyword =document.getElementById('txt1').value;
     var matrix = load_data_by_keyword(keyword);
 
-    var svg = d3.select("svg"),
+    var svg = d3.select("#svg-chord-diagram"),
         width = +svg.attr("width"),
         height = +svg.attr("height"),
         outerRadius = Math.min(width, height) * 0.5 - 40,

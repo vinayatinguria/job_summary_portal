@@ -1,37 +1,31 @@
-#canvas {
-    position:fixed;
-    top: 50%;
-    left: 50%;
-    border: 3px solid brown;
-    background-color: white;
-}
-
 .background {
     fill: white;
     pointer-events: all;
 }
 
+/*.background-size{
+    height: 400px;
+    width: 400px;}*/
+
 #states {
-    stroke: #000;
-    stroke-width: 1.5px;
+    stroke: white;
+    stroke-width: 1px;
 }
 
 #states text {
-    fill: #000;
+    fill: white;
     stroke: none;
     text-anchor:middle;
     font-size: 10px;
 }
 
 #states .active {
-    fill: steelblue !important;
+    fill: orange !important;
 }
 
 #states text.active {
     font-size: 12px;
     font-weight:bold;
-    fill: #fff;
     stroke-width: .5px;
-    fill: #fff !important;
     stroke: #000;
 }

@@ -57,16 +57,31 @@
         }
 
     </script>
+    <script>
+        function keywordEntered() {
+            create_chord_diag();
+            create_heatmap();
+        }
+    </script>
+    <script>
+        var data_set = [];
+        d3.csv("data_2015.csv", function (data) {
+            data_set = data.map(function (d) {
+                return [ d["ST"].toLowerCase(), d["STATE"], d["OCC_TITLE"]];
+            });
+        });
+    </script>
 </head>
 
 <body>
 
-<input type="text" id="txt1" value="Analyst"/>
-<input type="button" value="Search Keyword" onclick="create_chord_diag()" /> <br>
-<link ref="stylesheet" type="text/css" href="css/chord_diagram.css">
-<link ref="stylesheet" type="text/css" href="css/us_heatmap.css">
-<svg id="svg-chord-diagram" width="300" height="300"></svg>
-<svg id="svg-us-heatmap" width="300" height="300"></svg>
+<input type="text" id="txt1" value=""/>
+<input type="button" value="Search Keyword" onclick="keywordEntered()" /> <br>
+<link rel="stylesheet" type="text/css" href="css/chord_diagram.css">
+<link rel="stylesheet" type="text/css" href="css/us_heatmap.css">
+<svg id="svg-us-heatmap" width=700 height=700></svg>
+<svg id="svg-chord-diagram" width=600 height=700></svg>
+
 <div>
 <div id="chord-diagram">
     <script src="js/chord_diagram.js"></script>

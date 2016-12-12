@@ -1,54 +1,73 @@
-var hits = {};
-var parade = window.histograms.states;
-for (var i = 0 ; i<parade.length ; i++)
-    hits[parade[i].name] = parade[i].hits;
+function create_heatmap() {
 
-var svg = d3.select("#svg-us-heatmap"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height"),
-    centered;
+    var keyword = document.getElementById('txt1').value;
+    console.log(data_set);
 
-var projection = d3.geoAlbersUsa()
-    .scale(width)
-    .translate([0, 0]);
 
-var path = d3.geoPath(projection)
-    .projection(projection);
 
-svg.append("rect")
-    .attr("class", "background")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("color", "#ffffff")
-    .on("click", click);
+    var hits = {};
+    var parade = window.histograms.states;
+    for (var i = 0; i < parade.length; i++)
+        hits[parade[i].name] = parade[i].hits;
 
-var g = svg.append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
-    .append("g")
-    .attr("id", "states");
+    var svg = d3.select("#svg-us-heatmap"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height"),
+        centered;
 
-d3.json("states.json", function(json) {
-    var heatmap = d3.scaleLinear()
-        .domain([0,d3.max(json.features, function(d) { return Math.log(hits[d.properties.abbr] || 1); })])
-        .interpolate(d3.interpolateRgb)
-        .range(["#ffffff","#073f07"])
-    var states = g.selectAll("path")
-        .data(json.features)
-        .enter().append("path")
-        .attr("d", path)
-        .attr("id", function(d) { return d.properties.abbr; })
-        .style("fill", function(d) { return heatmap(Math.log(hits[d.properties.abbr] || 1)); })
-        .on("click", click)
-    var labels = g.selectAll("text")
-        .data(json.features)
-        .enter().append("text")
-        .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
-        .attr("id", function(d) { return 'label-'+d.properties.abbr; })
-        .attr("dy", ".35em")
-        .on("click", click)
-        .text(function(d) { return d.properties.abbr; });
-});
+    var projection = d3.geoAlbersUsa()
+        .scale(width)
+        .translate([0, 0]);
 
+    var path = d3.geoPath(projection)
+        .projection(projection);
+
+    svg.append("rect")
+        .attr("class", "background")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("color", "white")
+        .on("click", click);
+
+    var g = svg.append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+        .append("g")
+        .attr("id", "states");
+
+    d3.json("states.json", function (json) {
+        var heatmap = d3.scaleLinear()
+            .domain([0, d3.max(json.features, function (d) {
+                return Math.log(hits[d.properties.abbr] || 1);
+            })])
+            .interpolate(d3.interpolateRgb)
+            .range(["#ffffff", "#073f07"])
+        var states = g.selectAll("path")
+            .data(json.features)
+            .enter().append("path")
+            .attr("d", path)
+            .attr("id", function (d) {
+                return d.properties.abbr;
+            })
+            .style("fill", function (d) {
+                return heatmap(Math.log(hits[d.properties.abbr] || 1));
+            })
+            .on("click", click)
+        var labels = g.selectAll("text")
+            .data(json.features)
+            .enter().append("text")
+            .attr("transform", function (d) {
+                return "translate(" + path.centroid(d) + ")";
+            })
+            .attr("id", function (d) {
+                return 'label-' + d.properties.abbr;
+            })
+            .attr("dy", ".35em")
+            .on("click", click)
+            .text(function (d) {
+                return d.properties.abbr;
+            });
+    });
+}
 function click(d) {
     var x = 0,
         y = 0,
